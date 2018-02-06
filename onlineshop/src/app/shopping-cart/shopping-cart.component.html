@@ -1,3 +1,6 @@
-<p>
-  shopping-cart works!
-</p>
+  <div *ngFor = "let cartItem of cartItems">
+    <h2>Shopping Cart</h2>
+    <h3>{{cartItem.type}}</h3>
+    <h3>{{cartItem.price | currency:'USD':true}}</h3>
+
+  </div>

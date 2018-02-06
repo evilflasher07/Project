@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
+import {ProductsService} from './services/products.service';
+import {CartService} from './services/cart.service'
+
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
@@ -17,6 +21,8 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+
 
 @NgModule({
   declarations: [
@@ -30,10 +36,12 @@ import { LoginComponent } from './login/login.component';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -49,7 +57,7 @@ import { LoginComponent } from './login/login.component';
       
     ])
   ],
-  providers: [],
+  providers: [ProductsService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
