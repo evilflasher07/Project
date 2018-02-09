@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms'
 import {ProductsService} from './services/products.service';
-import {CartService} from './services/cart.service'
+import {CartService} from './services/cart.service';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -22,6 +23,8 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { AddProductComponent } from './add-product/add-product.component';
+import { SortByPipe } from './pipes/sort-by.pipe';
 
 
 @NgModule({
@@ -37,11 +40,14 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    AddProductComponent,
+    SortByPipe
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,

@@ -1,5 +1,51 @@
+<div>
+<div class="row">
+  <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="col-sm-4">
+            <label for="sort-field">Sort By</label>
+            <select 
+              class="form-control" 
+              name="sort-field" 
+              id="sort-field" 
+              [(ngModel)]="sortField">
+              <option 
+                *ngFor="let field of sortFields" 
+                [value]="field">
+                  {{ field }}
+                </option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <label for="sort-direction">Sort Direction</label>
+            <div>
+              
+              <button 
+                class="btn btn-primary"
+                [ngClass]="{'btn-success': sortDirection == 'asc'}"
+                (click)="sortDirection = 'asc'">
+                  Asc
+              </button>
+  
+              <button
+                class="btn btn-primary"
+                [ngClass]="{'btn-success': sortDirection == 'desc'}"
+                (click)="sortDirection = 'desc'">
+                  Desc
+              </button>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
+
 <div class = "row">
-  <div *ngFor = "let product of products" class="col-sm-4" >
+  <div *ngFor = "let product of products  | sortBy: [sortField,sortDirection]" class="col-sm-4">
     <product-card [product] = "product"></product-card>
   </div>
+</div>
 </div>
