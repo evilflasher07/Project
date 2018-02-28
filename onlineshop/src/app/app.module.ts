@@ -19,6 +19,12 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { AdminAuthGuardService } from './admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,8 @@ import { LoginComponent } from './login/login.component';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -44,16 +51,36 @@ import { LoginComponent } from './login/login.component';
       { path: '', component: HomeComponent},
       { path: 'products', component: ProductsComponent},
       { path: 'shopping-cart', component: ShoppingCartComponent},
-      { path: 'check-out', component: CheckOutComponent},
-      { path: 'order-success', component: OrderSuccessComponent},
+      { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGuardService]},
+      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService]},
       { path: 'login', component: LoginComponent},
-      { path: 'admin/products', component: AdminProductsComponent},
-      { path: 'admin/orders', component: AdminOrdersComponent},
-      { path: 'my/orders', component: MyOrdersComponent},
+      { 
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      { 
+        path: 'admin/products/new',
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      { 
+        path: 'admin/orders', 
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      { path: 'my/orders', component: MyOrdersComponent, canActivate:[AuthGuardService]},
       
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuardService,
+    UserService,
+    AdminAuthGuardService,
+    CategoryService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
