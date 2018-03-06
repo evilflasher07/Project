@@ -30,7 +30,17 @@ export class ProductFormComponent implements OnInit {
     if(this.id) this.productService.update(this.id,product);
     else this.productService.create(product);
     this.router.navigate(['/admin/products']);
-  
+  }
+
+  delete(){
+    if(confirm('Sure ka bang idedelete mo to?')){
+      this.productService.delete(this.id);
+      this.router.navigate(['/admin/products']);
+    }
+  }
+
+  back(){
+    this.router.navigate(['/admin/products']);
   }
 
   ngOnInit() {
